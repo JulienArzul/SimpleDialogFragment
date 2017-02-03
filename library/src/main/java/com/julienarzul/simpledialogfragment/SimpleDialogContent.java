@@ -2,7 +2,6 @@ package com.julienarzul.simpledialogfragment;
 
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 
 import com.google.auto.value.AutoValue;
 
@@ -13,20 +12,9 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class SimpleDialogContent implements Parcelable {
 
-    public static SimpleDialogContent create(String title, String message) {
-        return create(title, message, null, null, null);
-    }
-
-    public static SimpleDialogContent create(String title, String message, String confirmButtonText, String negativeButtonText, Integer requestCode) {
-        return create(title, message, confirmButtonText, negativeButtonText, requestCode, true);
-    }
-
-    public static SimpleDialogContent create(String title, String message, String confirmButtonText, String negativeButtonText, Integer requestCode, boolean cancelable) {
-        if (TextUtils.isEmpty(message)) {
-            return null;
-        }
-
-        return new AutoValue_SimpleDialogContent(title, message, confirmButtonText, negativeButtonText, requestCode, cancelable);
+    public static Builder builder() {
+        return new AutoValue_SimpleDialogContent.Builder()
+                .setCancelable(true);
     }
 
     @Nullable
@@ -35,7 +23,7 @@ public abstract class SimpleDialogContent implements Parcelable {
     public abstract String message();
 
     @Nullable
-    public abstract String confirmButtonText();
+    public abstract String positiveButtonText();
 
     @Nullable
     public abstract String negativeButtonText();
@@ -44,4 +32,22 @@ public abstract class SimpleDialogContent implements Parcelable {
     public abstract Integer requestCode();
 
     public abstract boolean cancelable();
+
+    @AutoValue.Builder
+    public abstract static class Builder {
+
+        public abstract Builder setTitle(String title);
+
+        public abstract Builder setMessage(String message);
+
+        public abstract Builder setPositiveButtonText(String positiveButtonText);
+
+        public abstract Builder setNegativeButtonText(String negativeButtonText);
+
+        public abstract Builder setRequestCode(Integer requestCode);
+
+        public abstract Builder setCancelable(boolean cancelable);
+
+        public abstract SimpleDialogContent build();
+    }
 }

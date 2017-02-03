@@ -26,7 +26,7 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     private static final String MESSAGE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.message";
 
-    private static final String CONFIRM_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.confirmButtonText";
+    private static final String POSITIVE_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.positiveButtonText";
 
     private static final String NEGATIVE_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.negativeButtonText";
 
@@ -38,7 +38,7 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     private String message = null;
 
-    private String confirmButtonText = null;
+    private String positiveButtonText = null;
 
     private String negativeButtonText = null;
 
@@ -58,9 +58,9 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
                 args.putString(MESSAGE_BUNDLE_KEY, message);
             }
 
-            String confirmButtonText = dialogContent.confirmButtonText();
-            if (!TextUtils.isEmpty(confirmButtonText)) {
-                args.putString(CONFIRM_BUTTON_TEXT_BUNDLE_KEY, confirmButtonText);
+            String positiveButtonText = dialogContent.positiveButtonText();
+            if (!TextUtils.isEmpty(positiveButtonText)) {
+                args.putString(POSITIVE_BUTTON_TEXT_BUNDLE_KEY, positiveButtonText);
             }
 
             String negativeButtonText = dialogContent.negativeButtonText();
@@ -91,7 +91,7 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
         if (arguments != null) {
             this.title = arguments.getString(TITLE_BUNDLE_KEY);
             this.message = arguments.getString(MESSAGE_BUNDLE_KEY);
-            this.confirmButtonText = arguments.getString(CONFIRM_BUTTON_TEXT_BUNDLE_KEY);
+            this.positiveButtonText = arguments.getString(POSITIVE_BUTTON_TEXT_BUNDLE_KEY);
             this.negativeButtonText = arguments.getString(NEGATIVE_BUTTON_TEXT_BUNDLE_KEY, null);
             if (arguments.containsKey(REQUEST_CODE_BUNDLE_KEY)) {
                 this.requestCode = arguments.getInt(REQUEST_CODE_BUNDLE_KEY);
@@ -114,10 +114,10 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
             builder.setMessage(this.message);
         }
 
-        if (TextUtils.isEmpty(this.confirmButtonText)) {
-            this.confirmButtonText = getString(android.R.string.ok);
+        if (TextUtils.isEmpty(this.positiveButtonText)) {
+            this.positiveButtonText = getString(android.R.string.ok);
         }
-        builder.setPositiveButton(this.confirmButtonText, this);
+        builder.setPositiveButton(this.positiveButtonText, this);
 
         if (!TextUtils.isEmpty(this.negativeButtonText)) {
             builder.setNegativeButton(this.negativeButtonText, this);

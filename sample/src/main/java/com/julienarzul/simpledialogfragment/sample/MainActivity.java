@@ -37,49 +37,53 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     @OnClick(R.id.simple_dialog_no_title_button)
     void onNoTitleButtonClicked() {
         this.displaySimpleDialogFragment(
-                SimpleDialogContent.create(null, this.getString(R.string.dialog_message)));
+                SimpleDialogContent.builder()
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .build());
     }
 
     @OnClick(R.id.simple_dialog_with_title_button)
     void onWithTitleButtonClicked() {
         this.displaySimpleDialogFragment(
-                SimpleDialogContent.create(
-                        this.getString(R.string.dialog_title),
-                        this.getString(R.string.dialog_message)));
+                SimpleDialogContent.builder()
+                        .setTitle(this.getString(R.string.dialog_title))
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .build());
     }
 
     @OnClick(R.id.simple_dialog_one_button_button)
     void onOneButtonButtonClicked() {
         this.displaySimpleDialogFragment(
-                SimpleDialogContent.create(
-                        this.getString(R.string.dialog_title),
-                        this.getString(R.string.dialog_message),
-                        this.getString(R.string.dialog_button_positive),
-                        null,
-                        SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE));
+                SimpleDialogContent.builder()
+                        .setTitle(this.getString(R.string.dialog_title))
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
+                        .setRequestCode(SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE)
+                        .build());
     }
 
     @OnClick(R.id.simple_dialog_two_buttons_button)
     void onTwoButtonsButtonClicked() {
         this.displaySimpleDialogFragment(
-                SimpleDialogContent.create(
-                        this.getString(R.string.dialog_title),
-                        this.getString(R.string.dialog_message),
-                        this.getString(R.string.dialog_button_positive),
-                        this.getString(R.string.dialog_button_negative),
-                        SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE));
+                SimpleDialogContent.builder()
+                        .setTitle(this.getString(R.string.dialog_title))
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
+                        .setNegativeButtonText(this.getString(R.string.dialog_button_negative))
+                        .setRequestCode(SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE)
+                        .build());
     }
 
     @OnClick(R.id.simple_dialog_not_cancelable_button)
     void onNotCancelableButtonClicked() {
         this.displaySimpleDialogFragment(
-                SimpleDialogContent.create(
-                        this.getString(R.string.dialog_title),
-                        this.getString(R.string.dialog_message),
-                        this.getString(R.string.dialog_button_positive),
-                        null,
-                        SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE,
-                        false));
+                SimpleDialogContent.builder()
+                        .setTitle(this.getString(R.string.dialog_title))
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
+                        .setRequestCode(SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE)
+                        .setCancelable(false)
+                        .build());
     }
 
     @Override
