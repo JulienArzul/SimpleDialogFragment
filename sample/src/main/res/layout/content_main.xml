@@ -27,4 +27,22 @@
         android:layout_height="wrap_content"
         android:text="Simple Dialog - With title"/>
 
+    <Button
+        android:id="@+id/simple_dialog_one_button_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple Dialog - 1 button"/>
+
+    <Button
+        android:id="@+id/simple_dialog_two_buttons_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple Dialog - 2 buttons"/>
+
+    <Button
+        android:id="@+id/simple_dialog_not_cancelable_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple Dialog - Not cancelable"/>
+
 </LinearLayout>

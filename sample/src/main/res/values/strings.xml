@@ -3,4 +3,6 @@
 
     <string name="dialog_title">Title</string>
     <string name="dialog_message">Message of the dialog</string>
+    <string name="dialog_button_positive">Yes</string>
+    <string name="dialog_button_negative">No</string>
 </resources>
