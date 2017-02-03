@@ -28,6 +28,9 @@ ext {
     // Google Versions
     supportVersion = "25.0.1"
 
+    // Square Versions
+    butterknifeVersion = "8.5.1"
+
     // Tests Libs versions
     junitVersion = "4.12"
     espressoVersion = "2.2.2"

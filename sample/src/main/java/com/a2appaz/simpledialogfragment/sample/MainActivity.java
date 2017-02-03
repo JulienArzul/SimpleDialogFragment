@@ -2,15 +2,15 @@ package com.a2appaz.simpledialogfragment.sample;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
 import com.a2appaz.simpledialogfragment.SimpleDialogFragment;
 import com.a2appaz.simpledialogfragment.SimpleDialogFragmentListener;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements SimpleDialogFragmentListener {
 
@@ -23,16 +23,18 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        ButterKnife.bind(this);
+    }
 
-        SimpleDialogFragment.newInstance("My Dialog", "Test of a simple dialog", this.getString(android.R.string.ok), this.getString(android.R.string.cancel), SIMPLE_DIALOG_REQUEST_CODE)
+    @OnClick(R.id.simple_dialog_no_title_button)
+    void onNoTitleButtonClicked() {
+        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_message))
+                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+    }
+
+    @OnClick(R.id.simple_dialog_with_title_button)
+    void onWithTitleButtonClicked() {
+        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_title), this.getString(R.string.dialog_message))
                 .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
     }
 
