@@ -1,4 +1,4 @@
-package com.a2appaz.simpledialogfragment;
+package com.julienarzul.simpledialogfragment;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -22,17 +22,17 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     private static final Integer DEFAULT_REQUEST_CODE = 0;
 
-    private static final String TITLE_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.SimpleDialogFragment.title";
+    private static final String TITLE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.title";
 
-    private static final String MESSAGE_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.SimpleDialogFragment.message";
+    private static final String MESSAGE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.message";
 
-    private static final String CONFIRM_BUTTON_TEXT_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.SimpleDialogFragment.confirmButtonText";
+    private static final String CONFIRM_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.confirmButtonText";
 
-    private static final String NEGATIVE_BUTTON_TEXT_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.SimpleDialogFragment.negativeButtonText";
+    private static final String NEGATIVE_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.negativeButtonText";
 
-    private static final String REQUEST_CODE_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.ui.core.SimpleDialogFragment.requestCode";
+    private static final String REQUEST_CODE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.requestCode";
 
-    private static final String CANCELABLE_BUNDLE_KEY = "com.nomadeducation.balthazar.android.ui.core.dialogs.ui.core.SimpleDialogFragment.cancelable";
+    private static final String CANCELABLE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.cancelable";
 
     private String title = null;
 

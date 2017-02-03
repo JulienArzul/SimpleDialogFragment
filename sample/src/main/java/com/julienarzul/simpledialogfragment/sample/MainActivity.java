@@ -1,4 +1,4 @@
-package com.a2appaz.simpledialogfragment.sample;
+package com.julienarzul.simpledialogfragment.sample;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.a2appaz.simpledialogfragment.SimpleDialogFragment;
-import com.a2appaz.simpledialogfragment.SimpleDialogFragmentListener;
+import com.julienarzul.simpledialogfragment.SimpleDialogFragment;
+import com.julienarzul.simpledialogfragment.SimpleDialogFragmentListener;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

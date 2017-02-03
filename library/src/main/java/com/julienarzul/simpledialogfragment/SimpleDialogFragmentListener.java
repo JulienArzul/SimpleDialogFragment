@@ -1,4 +1,4 @@
-package com.a2appaz.simpledialogfragment;
+package com.julienarzul.simpledialogfragment;
 
 import android.content.DialogInterface;
 
