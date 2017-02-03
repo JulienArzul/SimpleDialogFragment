@@ -44,53 +44,39 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     private Integer requestCode = null;
 
-    public static SimpleDialogFragment newInstance(String message) {
-        return newInstance(null, message);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message) {
-        return newInstance(title, message, null);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message, String confirmButtonText) {
-        return newInstance(title, message, confirmButtonText, null);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message, String confirmButtonText, Integer requestCode) {
-        return newInstance(title, message, confirmButtonText, null, true, requestCode);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message, String confirmButtonText, boolean cancelable, Integer requestCode) {
-        return newInstance(title, message, confirmButtonText, null, cancelable, requestCode);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message, String confirmButtonText, String negativeButtonText, Integer requestCode) {
-        return newInstance(title, message, confirmButtonText, negativeButtonText, true, requestCode);
-    }
-
-    public static SimpleDialogFragment newInstance(String title, String message, String confirmButtonText, String negativeButtonText, boolean cancelable, Integer requestCode) {
+    public static SimpleDialogFragment newInstance(SimpleDialogContent dialogContent) {
         Bundle args = new Bundle();
 
-        if (!TextUtils.isEmpty(title)) {
-            args.putString(TITLE_BUNDLE_KEY, title);
-        }
-        if (!TextUtils.isEmpty(message)) {
-            args.putString(MESSAGE_BUNDLE_KEY, message);
-        }
-        if (!TextUtils.isEmpty(confirmButtonText)) {
-            args.putString(CONFIRM_BUTTON_TEXT_BUNDLE_KEY, confirmButtonText);
-        }
+        if (dialogContent != null) {
+            String title = dialogContent.title();
+            if (!TextUtils.isEmpty(title)) {
+                args.putString(TITLE_BUNDLE_KEY, title);
+            }
 
-        if (!TextUtils.isEmpty(negativeButtonText)) {
-            args.putString(NEGATIVE_BUTTON_TEXT_BUNDLE_KEY, negativeButtonText);
-        }
+            String message = dialogContent.message();
+            if (!TextUtils.isEmpty(message)) {
+                args.putString(MESSAGE_BUNDLE_KEY, message);
+            }
 
-        if (requestCode == null) {
-            requestCode = DEFAULT_REQUEST_CODE;
-        }
-        args.putInt(REQUEST_CODE_BUNDLE_KEY, requestCode);
+            String confirmButtonText = dialogContent.confirmButtonText();
+            if (!TextUtils.isEmpty(confirmButtonText)) {
+                args.putString(CONFIRM_BUTTON_TEXT_BUNDLE_KEY, confirmButtonText);
+            }
 
-        args.putBoolean(CANCELABLE_BUNDLE_KEY, cancelable);
+            String negativeButtonText = dialogContent.negativeButtonText();
+            if (!TextUtils.isEmpty(negativeButtonText)) {
+                args.putString(NEGATIVE_BUTTON_TEXT_BUNDLE_KEY, negativeButtonText);
+            }
+
+            Integer requestCode = dialogContent.requestCode();
+            if (requestCode == null) {
+                requestCode = DEFAULT_REQUEST_CODE;
+            }
+            args.putInt(REQUEST_CODE_BUNDLE_KEY, requestCode);
+
+            boolean cancelable = dialogContent.cancelable();
+            args.putBoolean(CANCELABLE_BUNDLE_KEY, cancelable);
+        }
 
         SimpleDialogFragment fragment = new SimpleDialogFragment();
         fragment.setArguments(args);

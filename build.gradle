@@ -27,9 +27,13 @@ ext {
 
     // Google Versions
     supportVersion = "25.1.1"
+    autoValueVersion = "1.2"
 
     // Square Versions
     butterknifeVersion = "8.5.1"
+
+    // Other Versions
+    autoParcelVersion = "1.0.3"
 
     // Tests Libs versions
     junitVersion = "4.12"

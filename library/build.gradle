@@ -21,8 +21,17 @@ android {
     }
 }
 
+repositories {
+    // Repository for AutoParcel
+    maven { url "https://clojars.org/repo/" }
+}
+
 dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
+
+    provided "com.google.auto.value:auto-value:$rootProject.ext.autoValueVersion"
+    annotationProcessor "com.google.auto.value:auto-value:$rootProject.ext.autoValueVersion"
+    annotationProcessor "frankiesardo:auto-parcel:$rootProject.ext.autoParcelVersion"
 
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {

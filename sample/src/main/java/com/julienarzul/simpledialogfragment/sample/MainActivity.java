@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
+import com.julienarzul.simpledialogfragment.SimpleDialogContent;
 import com.julienarzul.simpledialogfragment.SimpleDialogFragment;
 import com.julienarzul.simpledialogfragment.SimpleDialogFragmentListener;
 
@@ -28,34 +29,57 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
         ButterKnife.bind(this);
     }
 
+    private void displaySimpleDialogFragment(SimpleDialogContent dialogContent) {
+        SimpleDialogFragment.newInstance(dialogContent)
+                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+    }
+
     @OnClick(R.id.simple_dialog_no_title_button)
     void onNoTitleButtonClicked() {
-        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_message))
-                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.create(null, this.getString(R.string.dialog_message)));
     }
 
     @OnClick(R.id.simple_dialog_with_title_button)
     void onWithTitleButtonClicked() {
-        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_title), this.getString(R.string.dialog_message))
-                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.create(
+                        this.getString(R.string.dialog_title),
+                        this.getString(R.string.dialog_message)));
     }
 
     @OnClick(R.id.simple_dialog_one_button_button)
     void onOneButtonButtonClicked() {
-        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_title), this.getString(R.string.dialog_message), this.getString(R.string.dialog_button_positive), SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE)
-                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.create(
+                        this.getString(R.string.dialog_title),
+                        this.getString(R.string.dialog_message),
+                        this.getString(R.string.dialog_button_positive),
+                        null,
+                        SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE));
     }
 
     @OnClick(R.id.simple_dialog_two_buttons_button)
     void onTwoButtonsButtonClicked() {
-        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_title), this.getString(R.string.dialog_message), this.getString(R.string.dialog_button_positive), this.getString(R.string.dialog_button_negative), SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE)
-                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.create(
+                        this.getString(R.string.dialog_title),
+                        this.getString(R.string.dialog_message),
+                        this.getString(R.string.dialog_button_positive),
+                        this.getString(R.string.dialog_button_negative),
+                        SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE));
     }
 
     @OnClick(R.id.simple_dialog_not_cancelable_button)
     void onNotCancelableButtonClicked() {
-        SimpleDialogFragment.newInstance(this.getString(R.string.dialog_title), this.getString(R.string.dialog_message), this.getString(R.string.dialog_button_positive), false, SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE)
-                .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.create(
+                        this.getString(R.string.dialog_title),
+                        this.getString(R.string.dialog_message),
+                        this.getString(R.string.dialog_button_positive),
+                        null,
+                        SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE,
+                        false));
     }
 
     @Override
