@@ -11,4 +11,6 @@ public interface SimpleDialogFragmentListener {
     void onPositiveButtonClicked(DialogInterface dialog, Integer requestCode);
 
     void onNegativeButtonClicked(DialogInterface dialog, Integer requestCode);
+
+    void onNeutralButtonClicked(DialogInterface dialog, Integer requestCode);
 }

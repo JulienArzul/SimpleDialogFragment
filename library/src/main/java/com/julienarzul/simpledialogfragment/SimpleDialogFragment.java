@@ -55,13 +55,14 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        String title = null, message = null, positiveButtonText = null, negativeButtonText = null;
+        String title = null, message = null, positiveButtonText = null, negativeButtonText = null, neutralButtonText = null;
         boolean cancelable = true;
         if (this.dialogContent != null) {
             title = this.dialogContent.title();
             message = this.dialogContent.message();
             positiveButtonText = this.dialogContent.positiveButtonText();
             negativeButtonText = this.dialogContent.negativeButtonText();
+            neutralButtonText = this.dialogContent.neutralButtonText();
         }
 
         if (!TextUtils.isEmpty(title)) {
@@ -76,6 +77,9 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
         builder.setPositiveButton(positiveButtonText, this);
         if (!TextUtils.isEmpty(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText, this);
+        }
+        if (!TextUtils.isEmpty(neutralButtonText)) {
+            builder.setNeutralButton(neutralButtonText, this);
         }
 
         return builder.create();
@@ -95,6 +99,10 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
                 case DialogInterface.BUTTON_NEGATIVE:
                     listener.onNegativeButtonClicked(dialog, requestCode);
+                    break;
+
+                case DialogInterface.BUTTON_NEUTRAL:
+                    listener.onNeutralButtonClicked(dialog, requestCode);
                     break;
             }
         } else {

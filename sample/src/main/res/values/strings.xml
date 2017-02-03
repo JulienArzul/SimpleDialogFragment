@@ -5,4 +5,5 @@
     <string name="dialog_message">Message of the dialog</string>
     <string name="dialog_button_positive">Yes</string>
     <string name="dialog_button_negative">No</string>
+    <string name="dialog_button_neutral">Maybe</string>
 </resources>

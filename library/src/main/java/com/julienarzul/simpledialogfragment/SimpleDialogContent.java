@@ -29,6 +29,9 @@ public abstract class SimpleDialogContent implements Parcelable {
     public abstract String negativeButtonText();
 
     @Nullable
+    public abstract String neutralButtonText();
+
+    @Nullable
     public abstract Integer requestCode();
 
     public abstract boolean cancelable();
@@ -43,6 +46,8 @@ public abstract class SimpleDialogContent implements Parcelable {
         public abstract Builder setPositiveButtonText(String positiveButtonText);
 
         public abstract Builder setNegativeButtonText(String negativeButtonText);
+
+        public abstract Builder setNeutralButtonText(String neutralButtonText);
 
         public abstract Builder setRequestCode(Integer requestCode);
 

@@ -92,4 +92,15 @@ public class NestedFragment extends Fragment implements SimpleDialogFragmentList
             }
         }
     }
+
+    @Override
+    public void onNeutralButtonClicked(DialogInterface dialog, Integer requestCode) {
+        if (requestCode != null) {
+            switch (requestCode) {
+                case SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE:
+                    // No neutral button
+                    break;
+            }
+        }
+    }
 }

@@ -40,6 +40,12 @@
         android:text="Simple Dialog - 2 buttons"/>
 
     <Button
+        android:id="@+id/simple_dialog_three_buttons_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Simple Dialog - 3 buttons"/>
+
+    <Button
         android:id="@+id/simple_dialog_not_cancelable_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

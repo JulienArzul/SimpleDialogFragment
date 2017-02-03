@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     private static final int SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE = 1;
     private static final int SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE = 2;
     private static final int SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE = 3;
+    private static final int SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,19 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
                         .build());
     }
 
+    @OnClick(R.id.simple_dialog_three_buttons_button)
+    void onThreeButtonsButtonClicked() {
+        this.displaySimpleDialogFragment(
+                SimpleDialogContent.builder()
+                        .setTitle(this.getString(R.string.dialog_title))
+                        .setMessage(this.getString(R.string.dialog_message))
+                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
+                        .setNegativeButtonText(this.getString(R.string.dialog_button_negative))
+                        .setNeutralButtonText(this.getString(R.string.dialog_button_neutral))
+                        .setRequestCode(SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE)
+                        .build());
+    }
+
     @OnClick(R.id.simple_dialog_not_cancelable_button)
     void onNotCancelableButtonClicked() {
         this.displaySimpleDialogFragment(
@@ -105,6 +119,10 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
                     Toast.makeText(this, "Two buttons - Positive button clicked", Toast.LENGTH_SHORT).show();
                     break;
 
+                case SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE:
+                    Toast.makeText(this, "Three buttons - Positive button clicked", Toast.LENGTH_SHORT).show();
+                    break;
+
                 case SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE:
                     Toast.makeText(this, "Not cancelable - Positive button clicked", Toast.LENGTH_SHORT).show();
                     break;
@@ -124,8 +142,35 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
                     Toast.makeText(this, "Two buttons - Negative button clicked", Toast.LENGTH_SHORT).show();
                     break;
 
+                case SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE:
+                    Toast.makeText(this, "Three buttons - Negative button clicked", Toast.LENGTH_SHORT).show();
+                    break;
+
                 case SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE:
                     // No negative button
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void onNeutralButtonClicked(DialogInterface dialog, Integer requestCode) {
+        if (requestCode != null) {
+            switch (requestCode) {
+                case SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE:
+                    // No neutral button
+                    break;
+
+                case SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE:
+                    // No neutral button
+                    break;
+
+                case SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE:
+                    Toast.makeText(this, "Three buttons - Neutral button clicked", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case SIMPLE_DIALOG_NOT_CANCELABLE_REQUEST_CODE:
+                    // No neutral button
                     break;
             }
         }
