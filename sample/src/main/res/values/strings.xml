@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SimpleDialogFragment</string>
+    <string name="app_name">SimpleDialogFragment Sample</string>
 
     <string name="dialog_title">Title</string>
     <string name="dialog_message">Message of the dialog</string>
