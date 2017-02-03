@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.julienarzul.simpledialogfragment.SimpleDialogContent;
 import com.julienarzul.simpledialogfragment.SimpleDialogFragment;
-import com.julienarzul.simpledialogfragment.SimpleDialogFragmentListener;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,7 +21,8 @@ import butterknife.Unbinder;
  * Copyright @ Julien Arzul 2017
  */
 
-public class NestedFragment extends Fragment implements SimpleDialogFragmentListener {
+public class NestedFragment extends Fragment implements SimpleDialogFragment.OnPositiveButtonClickListener,
+        SimpleDialogFragment.OnNegativeButtonClickListener {
 
     private static final int SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE = 101;
 
@@ -72,7 +72,7 @@ public class NestedFragment extends Fragment implements SimpleDialogFragmentList
     }
 
     @Override
-    public void onPositiveButtonClicked(DialogInterface dialog, Integer requestCode) {
+    public void onDialogPositiveButtonClicked(DialogInterface dialog, Integer requestCode) {
         if (requestCode != null) {
             switch (requestCode) {
                 case SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE:
@@ -83,22 +83,11 @@ public class NestedFragment extends Fragment implements SimpleDialogFragmentList
     }
 
     @Override
-    public void onNegativeButtonClicked(DialogInterface dialog, Integer requestCode) {
+    public void onDialogNegativeButtonClicked(DialogInterface dialog, Integer requestCode) {
         if (requestCode != null) {
             switch (requestCode) {
                 case SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE:
                     Toast.makeText(this.getContext(), "Nested in Fragment - Negative button clicked", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        }
-    }
-
-    @Override
-    public void onNeutralButtonClicked(DialogInterface dialog, Integer requestCode) {
-        if (requestCode != null) {
-            switch (requestCode) {
-                case SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE:
-                    // No neutral button
                     break;
             }
         }

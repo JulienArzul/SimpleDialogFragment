@@ -87,44 +87,60 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Pair<SimpleDialogFragmentListener, Integer> listenerPair = this.getListener();
+        switch (which) {
+            case DialogInterface.BUTTON_POSITIVE:
+                Pair<OnPositiveButtonClickListener, Integer> positiveButtonListenerPair = this.getListener(OnPositiveButtonClickListener.class);
+                if (positiveButtonListenerPair != null) {
+                    positiveButtonListenerPair.first.onDialogPositiveButtonClicked(dialog, positiveButtonListenerPair.second);
+                }
+                break;
 
-        if (listenerPair != null) {
-            SimpleDialogFragmentListener listener = listenerPair.first;
-            Integer requestCode = listenerPair.second;
-            switch (which) {
-                case DialogInterface.BUTTON_POSITIVE:
-                    listener.onPositiveButtonClicked(dialog, requestCode);
-                    break;
+            case DialogInterface.BUTTON_NEGATIVE:
+                Pair<OnNegativeButtonClickListener, Integer> negativeListenerPair = this.getListener(OnNegativeButtonClickListener.class);
+                if (negativeListenerPair != null) {
+                    negativeListenerPair.first.onDialogNegativeButtonClicked(dialog, negativeListenerPair.second);
+                }
+                break;
 
-                case DialogInterface.BUTTON_NEGATIVE:
-                    listener.onNegativeButtonClicked(dialog, requestCode);
-                    break;
-
-                case DialogInterface.BUTTON_NEUTRAL:
-                    listener.onNeutralButtonClicked(dialog, requestCode);
-                    break;
-            }
-        } else {
-            dialog.dismiss();
+            case DialogInterface.BUTTON_NEUTRAL:
+                Pair<OnNeutralButtonClickListener, Integer> neutralListenerPair = this.getListener(OnNeutralButtonClickListener.class);
+                if (neutralListenerPair != null) {
+                    neutralListenerPair.first.onDialogNeutralButtonClicked(dialog, neutralListenerPair.second);
+                }
+                break;
         }
     }
 
-    private Pair<SimpleDialogFragmentListener, Integer> getListener() {
+    private <T> Pair<T, Integer> getListener(Class<T> listenerClazz) {
         Fragment targetFragment = this.getTargetFragment();
-        if (targetFragment instanceof SimpleDialogFragmentListener) {
-            return new Pair<>((SimpleDialogFragmentListener) targetFragment, this.getTargetRequestCode());
+        if (listenerClazz.isInstance(targetFragment)) {
+            return new Pair<>((T) targetFragment, this.getTargetRequestCode());
         }
 
         FragmentActivity activity = this.getActivity();
-        if (activity instanceof SimpleDialogFragmentListener) {
+        if (listenerClazz.isInstance(activity)) {
             Integer requestCode = DEFAULT_REQUEST_CODE;
             if (this.dialogContent != null) {
                 requestCode = this.dialogContent.requestCode();
             }
-            return new Pair<>((SimpleDialogFragmentListener) activity, requestCode);
+            return new Pair<>((T) activity, requestCode);
         }
 
         return null;
+    }
+
+    public interface OnPositiveButtonClickListener {
+
+        void onDialogPositiveButtonClicked(DialogInterface dialog, Integer requestCode);
+    }
+
+    public interface OnNegativeButtonClickListener {
+
+        void onDialogNegativeButtonClicked(DialogInterface dialog, Integer requestCode);
+    }
+
+    public interface OnNeutralButtonClickListener {
+
+        void onDialogNeutralButtonClicked(DialogInterface dialog, Integer requestCode);
     }
 }

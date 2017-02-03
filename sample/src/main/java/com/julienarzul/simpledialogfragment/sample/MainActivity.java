@@ -8,12 +8,12 @@ import android.widget.Toast;
 
 import com.julienarzul.simpledialogfragment.SimpleDialogContent;
 import com.julienarzul.simpledialogfragment.SimpleDialogFragment;
-import com.julienarzul.simpledialogfragment.SimpleDialogFragmentListener;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements SimpleDialogFragmentListener {
+public class MainActivity extends AppCompatActivity implements SimpleDialogFragment.OnPositiveButtonClickListener,
+        SimpleDialogFragment.OnNegativeButtonClickListener, SimpleDialogFragment.OnNeutralButtonClickListener {
 
     private static final int SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE = 1;
     private static final int SIMPLE_DIALOG_TWO_BUTTONS_REQUEST_CODE = 2;
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     }
 
     @Override
-    public void onPositiveButtonClicked(DialogInterface dialog, Integer requestCode) {
+    public void onDialogPositiveButtonClicked(DialogInterface dialog, Integer requestCode) {
         if (requestCode != null) {
             switch (requestCode) {
                 case SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE:
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     }
 
     @Override
-    public void onNegativeButtonClicked(DialogInterface dialog, Integer requestCode) {
+    public void onDialogNegativeButtonClicked(DialogInterface dialog, Integer requestCode) {
         if (requestCode != null) {
             switch (requestCode) {
                 case SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE:
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     }
 
     @Override
-    public void onNeutralButtonClicked(DialogInterface dialog, Integer requestCode) {
+    public void onDialogNeutralButtonClicked(DialogInterface dialog, Integer requestCode) {
         if (requestCode != null) {
             switch (requestCode) {
                 case SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE:
