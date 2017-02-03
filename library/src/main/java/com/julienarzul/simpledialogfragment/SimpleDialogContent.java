@@ -7,7 +7,7 @@ import com.google.auto.value.AutoValue;
 
 /**
  * Created by Julien Arzul on 13/12/2016.
- * Copyright @ ZenPark 2016
+ * Copyright @ Julien Arzul 2016
  */
 @AutoValue
 public abstract class SimpleDialogContent implements Parcelable {

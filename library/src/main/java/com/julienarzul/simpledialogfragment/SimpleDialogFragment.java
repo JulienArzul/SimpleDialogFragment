@@ -14,7 +14,7 @@ import android.text.TextUtils;
 
 /**
  * Created by Julien Arzul on 09/11/2016.
- * Copyright @ 2 App à Z 2016
+ * Copyright @ Julien Arzul 2016
  */
 public class SimpleDialogFragment extends DialogFragment implements DialogInterface.OnClickListener {
 
