@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -16,6 +16,28 @@ allprojects {
     repositories {
         jcenter()
     }
+}
+
+ext {
+    // Build tools
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.2"
+    minSdkVersion = 15
+    targetSdkVersion = 25
+
+    // Google Versions
+    supportVersion = "25.1.1"
+    autoValueVersion = "1.2"
+
+    // Square Versions
+    butterknifeVersion = "8.5.1"
+
+    // Other Versions
+    autoParcelVersion = "1.0.3"
+
+    // Tests Libs versions
+    junitVersion = "4.12"
+    espressoVersion = "2.2.2"
 }
 
 task clean(type: Delete) {
