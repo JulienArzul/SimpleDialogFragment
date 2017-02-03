@@ -1,0 +1,23 @@
+ext {
+    bintrayRepo = 'AndroidLibraries'
+    bintrayName = 'SimpleDialogFragment'
+
+    publishedGroupId = 'com.julienarzul'
+    libraryName = 'SimpleDialogFragment'
+    artifact = 'simpledialogfragment'
+
+    libraryDescription = 'An Android library that provides a simple implementation of a DialogFragment'
+
+    siteUrl = 'https://github.com/JulienArzul/SimpleDialogFragment'
+    gitUrl = 'https://github.com/JulienArzul/SimpleDialogFragment.git'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'JulienArzul'
+    developerName = 'Julien Arzul'
+    developerEmail = 'julien.arzul@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}

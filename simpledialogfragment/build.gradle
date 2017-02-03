@@ -38,3 +38,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }
+
+apply from: '../bintray-settings.gradle'
+apply from: '../external/gradle_scripts/installv1.gradle'
+apply from: '../external/gradle_scripts/bintrayv1.gradle'
