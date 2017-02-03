@@ -22,61 +22,14 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
     private static final Integer DEFAULT_REQUEST_CODE = 0;
 
-    private static final String TITLE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.title";
+    private static final String DIALOG_CONTENT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.dialogContent";
 
-    private static final String MESSAGE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.message";
-
-    private static final String POSITIVE_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.positiveButtonText";
-
-    private static final String NEGATIVE_BUTTON_TEXT_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.negativeButtonText";
-
-    private static final String REQUEST_CODE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.requestCode";
-
-    private static final String CANCELABLE_BUNDLE_KEY = "com.julienarzul.simpledialogfragment.SimpleDialogFragment.cancelable";
-
-    private String title = null;
-
-    private String message = null;
-
-    private String positiveButtonText = null;
-
-    private String negativeButtonText = null;
-
-    private Integer requestCode = null;
+    private SimpleDialogContent dialogContent = null;
 
     public static SimpleDialogFragment newInstance(SimpleDialogContent dialogContent) {
         Bundle args = new Bundle();
 
-        if (dialogContent != null) {
-            String title = dialogContent.title();
-            if (!TextUtils.isEmpty(title)) {
-                args.putString(TITLE_BUNDLE_KEY, title);
-            }
-
-            String message = dialogContent.message();
-            if (!TextUtils.isEmpty(message)) {
-                args.putString(MESSAGE_BUNDLE_KEY, message);
-            }
-
-            String positiveButtonText = dialogContent.positiveButtonText();
-            if (!TextUtils.isEmpty(positiveButtonText)) {
-                args.putString(POSITIVE_BUTTON_TEXT_BUNDLE_KEY, positiveButtonText);
-            }
-
-            String negativeButtonText = dialogContent.negativeButtonText();
-            if (!TextUtils.isEmpty(negativeButtonText)) {
-                args.putString(NEGATIVE_BUTTON_TEXT_BUNDLE_KEY, negativeButtonText);
-            }
-
-            Integer requestCode = dialogContent.requestCode();
-            if (requestCode == null) {
-                requestCode = DEFAULT_REQUEST_CODE;
-            }
-            args.putInt(REQUEST_CODE_BUNDLE_KEY, requestCode);
-
-            boolean cancelable = dialogContent.cancelable();
-            args.putBoolean(CANCELABLE_BUNDLE_KEY, cancelable);
-        }
+        args.putParcelable(DIALOG_CONTENT_BUNDLE_KEY, dialogContent);
 
         SimpleDialogFragment fragment = new SimpleDialogFragment();
         fragment.setArguments(args);
@@ -89,15 +42,11 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
         Bundle arguments = getArguments();
         if (arguments != null) {
-            this.title = arguments.getString(TITLE_BUNDLE_KEY);
-            this.message = arguments.getString(MESSAGE_BUNDLE_KEY);
-            this.positiveButtonText = arguments.getString(POSITIVE_BUTTON_TEXT_BUNDLE_KEY);
-            this.negativeButtonText = arguments.getString(NEGATIVE_BUTTON_TEXT_BUNDLE_KEY, null);
-            if (arguments.containsKey(REQUEST_CODE_BUNDLE_KEY)) {
-                this.requestCode = arguments.getInt(REQUEST_CODE_BUNDLE_KEY);
-            }
+            this.dialogContent = arguments.getParcelable(DIALOG_CONTENT_BUNDLE_KEY);
 
-            this.setCancelable(arguments.getBoolean(CANCELABLE_BUNDLE_KEY, true));
+            if (this.dialogContent != null) {
+                this.setCancelable(this.dialogContent.cancelable());
+            }
         }
     }
 
@@ -106,21 +55,27 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        if (!TextUtils.isEmpty(this.title)) {
-            builder.setTitle(this.title);
+        String title = null, message = null, positiveButtonText = null, negativeButtonText = null;
+        boolean cancelable = true;
+        if (this.dialogContent != null) {
+            title = this.dialogContent.title();
+            message = this.dialogContent.message();
+            positiveButtonText = this.dialogContent.positiveButtonText();
+            negativeButtonText = this.dialogContent.negativeButtonText();
         }
 
-        if (!TextUtils.isEmpty(this.message)) {
-            builder.setMessage(this.message);
+        if (!TextUtils.isEmpty(title)) {
+            builder.setTitle(title);
         }
-
-        if (TextUtils.isEmpty(this.positiveButtonText)) {
-            this.positiveButtonText = getString(android.R.string.ok);
+        if (!TextUtils.isEmpty(message)) {
+            builder.setMessage(message);
         }
-        builder.setPositiveButton(this.positiveButtonText, this);
-
-        if (!TextUtils.isEmpty(this.negativeButtonText)) {
-            builder.setNegativeButton(this.negativeButtonText, this);
+        if (TextUtils.isEmpty(positiveButtonText)) {
+            positiveButtonText = getString(android.R.string.ok);
+        }
+        builder.setPositiveButton(positiveButtonText, this);
+        if (!TextUtils.isEmpty(negativeButtonText)) {
+            builder.setNegativeButton(negativeButtonText, this);
         }
 
         return builder.create();
@@ -155,7 +110,11 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
 
         FragmentActivity activity = this.getActivity();
         if (activity instanceof SimpleDialogFragmentListener) {
-            return new Pair<>((SimpleDialogFragmentListener) activity, this.requestCode);
+            Integer requestCode = DEFAULT_REQUEST_CODE;
+            if (this.dialogContent != null) {
+                requestCode = this.dialogContent.requestCode();
+            }
+            return new Pair<>((SimpleDialogFragmentListener) activity, requestCode);
         }
 
         return null;
