@@ -45,4 +45,9 @@
         android:layout_height="wrap_content"
         android:text="Simple Dialog - Not cancelable"/>
 
+    <FrameLayout
+        android:id="@+id/simple_dialog_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

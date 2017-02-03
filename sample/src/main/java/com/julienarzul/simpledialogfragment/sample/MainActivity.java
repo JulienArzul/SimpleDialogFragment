@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+
+        if (savedInstanceState == null) {
+            this.getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.simple_dialog_fragment_container, NestedFragment.newInstance())
+                    .commit();
+        }
     }
 
     private void displaySimpleDialogFragment(SimpleDialogContent dialogContent) {
