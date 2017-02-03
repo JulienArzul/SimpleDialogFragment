@@ -56,7 +56,6 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
         String title = null, message = null, positiveButtonText = null, negativeButtonText = null, neutralButtonText = null;
-        boolean cancelable = true;
         if (this.dialogContent != null) {
             title = this.dialogContent.title();
             message = this.dialogContent.message();
