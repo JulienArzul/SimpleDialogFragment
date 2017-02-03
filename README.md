@@ -20,7 +20,10 @@ Example of use :
 
 
 ## Getting started
-// TODO : upload library to jcenter
+
+    dependencies {
+        compile 'com.julienarzul:simpledialogfragment:1.0.0'
+    }
 
 ## How to use
 // TODO : Proper doc of the different cases (Builder + listeners)
