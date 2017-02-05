@@ -6,7 +6,14 @@ import android.support.annotation.Nullable;
 import com.google.auto.value.AutoValue;
 
 /**
- * Created by Julien Arzul on 13/12/2016.
+ * Immutable value class that represents the content of an AlertDialog shown with {@link SimpleDialogFragment}.
+ * The class is Parcelable in order to be given to the DialogFragment as a bundle argument.
+ * <p>
+ * Create an instance of this class with a {@link SimpleDialogContent.Builder}, retrieved through the static method
+ * {@link #builder()}.
+ * <p>
+ * The only required @NotNull field is the message of the dialog.
+ * <p>
  * Copyright @ Julien Arzul 2016
  */
 @AutoValue
