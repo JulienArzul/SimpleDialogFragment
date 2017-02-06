@@ -41,8 +41,6 @@ The following example shows the code to use to display a dialog with a custom ti
                         .build())
                 .show(this.getSupportFragmentManager(), SimpleDialogFragment.TAG);
 
-If the positive button text is not set, the dialog will still display a positive button with the android resource "android.R.string.ok". This is made to avoid displaying a dialog without any buttons.
-
 ### Supported AlertDialog content
 The SimpleDialogContent object given to the SimpleDialogFragment supports defining:
 * a title
