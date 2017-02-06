@@ -104,10 +104,9 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
         if (!TextUtils.isEmpty(message)) {
             builder.setMessage(message);
         }
-        if (TextUtils.isEmpty(positiveButtonText)) {
-            positiveButtonText = getString(android.R.string.ok);
+        if (!TextUtils.isEmpty(positiveButtonText)) {
+            builder.setPositiveButton(positiveButtonText, this);
         }
-        builder.setPositiveButton(positiveButtonText, this);
         if (!TextUtils.isEmpty(negativeButtonText)) {
             builder.setNegativeButton(negativeButtonText, this);
         }
