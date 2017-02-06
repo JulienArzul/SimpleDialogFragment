@@ -59,3 +59,11 @@ bintray {
         }
     }
 }
+
+// Added to handle dependencies link in the Javadoc :
+// http://stackoverflow.com/questions/34571371/android-studio-javadoc-cannot-find-symbol
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompile.classpath.files
+    })
+}
