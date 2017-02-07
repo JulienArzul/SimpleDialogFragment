@@ -66,9 +66,8 @@ public class NestedFragment extends Fragment implements SimpleDialogFragment.OnP
                 .setRequestCode(SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE)
                 .build();
 
-        SimpleDialogFragment dialogFragment = SimpleDialogFragment.newInstance(dialogContent);
-        dialogFragment.setTargetFragment(this, SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE);
-        dialogFragment.show(this.getFragmentManager(), SimpleDialogFragment.TAG);
+        SimpleDialogFragment.newInstance(dialogContent)
+                .show(this.getChildFragmentManager(), SimpleDialogFragment.TAG);
     }
 
     @Override
