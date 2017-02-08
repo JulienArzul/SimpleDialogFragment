@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     void onOneButtonButtonClicked() {
         this.displaySimpleDialogFragment(
                 SimpleDialogContent.builder()
-                        .setTitle(this.getString(R.string.dialog_title))
-                        .setMessage(this.getString(R.string.dialog_message))
-                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
+                        .setTitle(R.string.dialog_title)
+                        .setMessage(R.string.dialog_message)
+                        .setPositiveButtonText(R.string.dialog_button_positive)
                         .setRequestCode(SIMPLE_DIALOG_ONE_BUTTON_REQUEST_CODE)
                         .build());
     }
@@ -86,11 +86,11 @@ public class MainActivity extends AppCompatActivity implements SimpleDialogFragm
     void onThreeButtonsButtonClicked() {
         this.displaySimpleDialogFragment(
                 SimpleDialogContent.builder()
-                        .setTitle(this.getString(R.string.dialog_title))
-                        .setMessage(this.getString(R.string.dialog_message))
-                        .setPositiveButtonText(this.getString(R.string.dialog_button_positive))
-                        .setNegativeButtonText(this.getString(R.string.dialog_button_negative))
-                        .setNeutralButtonText(this.getString(R.string.dialog_button_neutral))
+                        .setTitle(R.string.dialog_title)
+                        .setMessage(R.string.dialog_message)
+                        .setPositiveButtonText(R.string.dialog_button_positive)
+                        .setNegativeButtonText(R.string.dialog_button_negative)
+                        .setNeutralButtonText(R.string.dialog_button_neutral)
                         .setRequestCode(SIMPLE_DIALOG_THREE_BUTTONS_REQUEST_CODE)
                         .build());
     }

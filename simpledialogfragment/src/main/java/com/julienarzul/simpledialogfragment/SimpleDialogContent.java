@@ -1,7 +1,9 @@
 package com.julienarzul.simpledialogfragment;
 
+import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 
 import com.google.auto.value.AutoValue;
 
@@ -25,41 +27,101 @@ public abstract class SimpleDialogContent implements Parcelable {
     }
 
     @Nullable
-    public abstract String title();
+    abstract AndroidStringResource title();
 
-    public abstract String message();
-
-    @Nullable
-    public abstract String positiveButtonText();
+    abstract AndroidStringResource message();
 
     @Nullable
-    public abstract String negativeButtonText();
+    abstract AndroidStringResource positiveButtonText();
 
     @Nullable
-    public abstract String neutralButtonText();
+    abstract AndroidStringResource negativeButtonText();
+
+    @Nullable
+    abstract AndroidStringResource neutralButtonText();
 
     @Nullable
     public abstract Integer requestCode();
 
     public abstract boolean cancelable();
 
+    public String title(Context context) {
+        return AndroidStringResource.valueOf(this.title(), context);
+    }
+
+    public String message(Context context) {
+        return AndroidStringResource.valueOf(this.message(), context);
+    }
+
+    public String positiveButtonText(Context context) {
+        return AndroidStringResource.valueOf(this.positiveButtonText(), context);
+    }
+
+    public String negativeButtonText(Context context) {
+        return AndroidStringResource.valueOf(this.negativeButtonText(), context);
+    }
+
+    public String neutralButtonText(Context context) {
+        return AndroidStringResource.valueOf(this.neutralButtonText(), context);
+    }
+
     @AutoValue.Builder
     public abstract static class Builder {
 
-        public abstract Builder setTitle(String title);
+        abstract Builder setTitle(AndroidStringResource title);
 
-        public abstract Builder setMessage(String message);
+        abstract Builder setMessage(AndroidStringResource message);
 
-        public abstract Builder setPositiveButtonText(String positiveButtonText);
+        abstract Builder setPositiveButtonText(AndroidStringResource positiveButtonText);
 
-        public abstract Builder setNegativeButtonText(String negativeButtonText);
+        abstract Builder setNegativeButtonText(AndroidStringResource negativeButtonText);
 
-        public abstract Builder setNeutralButtonText(String neutralButtonText);
+        abstract Builder setNeutralButtonText(AndroidStringResource neutralButtonText);
 
         public abstract Builder setRequestCode(Integer requestCode);
 
         public abstract Builder setCancelable(boolean cancelable);
 
         public abstract SimpleDialogContent build();
+
+        public Builder setTitle(String title) {
+            return this.setTitle(AndroidStringResource.create(title));
+        }
+
+        public Builder setTitle(@StringRes int title) {
+            return this.setTitle(AndroidStringResource.create(title));
+        }
+
+        public Builder setMessage(String message) {
+            return this.setMessage(AndroidStringResource.create(message));
+        }
+
+        public Builder setMessage(@StringRes int message) {
+            return this.setMessage(AndroidStringResource.create(message));
+        }
+
+        public Builder setPositiveButtonText(String positiveButtonText) {
+            return this.setPositiveButtonText(AndroidStringResource.create(positiveButtonText));
+        }
+
+        public Builder setPositiveButtonText(@StringRes int positiveButtonText) {
+            return this.setPositiveButtonText(AndroidStringResource.create(positiveButtonText));
+        }
+
+        public Builder setNegativeButtonText(String negativeButtonText) {
+            return this.setNegativeButtonText(AndroidStringResource.create(negativeButtonText));
+        }
+
+        public Builder setNegativeButtonText(@StringRes int negativeButtonText) {
+            return this.setNegativeButtonText(AndroidStringResource.create(negativeButtonText));
+        }
+
+        public Builder setNeutralButtonText(String neutralButtonText) {
+            return this.setNeutralButtonText(AndroidStringResource.create(neutralButtonText));
+        }
+
+        public Builder setNeutralButtonText(@StringRes int neutralButtonText) {
+            return this.setNeutralButtonText(AndroidStringResource.create(neutralButtonText));
+        }
     }
 }

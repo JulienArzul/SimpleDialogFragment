@@ -1,6 +1,7 @@
 package com.julienarzul.simpledialogfragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -88,14 +89,15 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        Context context = this.getContext();
 
         String title = null, message = null, positiveButtonText = null, negativeButtonText = null, neutralButtonText = null;
         if (this.dialogContent != null) {
-            title = this.dialogContent.title();
-            message = this.dialogContent.message();
-            positiveButtonText = this.dialogContent.positiveButtonText();
-            negativeButtonText = this.dialogContent.negativeButtonText();
-            neutralButtonText = this.dialogContent.neutralButtonText();
+            title = this.dialogContent.title(context);
+            message = this.dialogContent.message(context);
+            positiveButtonText = this.dialogContent.positiveButtonText(context);
+            negativeButtonText = this.dialogContent.negativeButtonText(context);
+            neutralButtonText = this.dialogContent.neutralButtonText(context);
         }
 
         if (!TextUtils.isEmpty(title)) {
