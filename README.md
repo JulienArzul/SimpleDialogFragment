@@ -22,7 +22,7 @@ Example of use :
 ## Getting started
 
     dependencies {
-        compile 'com.julienarzul:simpledialogfragment:1.0.2'
+        compile 'com.julienarzul:simpledialogfragment:1.1.0'
     }
 
 ## How to use
