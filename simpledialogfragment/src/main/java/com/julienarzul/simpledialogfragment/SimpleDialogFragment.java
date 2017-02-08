@@ -1,6 +1,7 @@
 package com.julienarzul.simpledialogfragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 
 /**
- * Simple implementation of a {@link DialogFragment} that allows you to specify the content of the {@link AlertDialog}
+ * Simple implementation of a DialogFragment that allows you to specify the content of the AlertDialog
  * displayed without subclassing it.
  * <p>
  * This DialogFragment must be instantiated with a {@link SimpleDialogContent} via the factory method {@link
@@ -22,16 +23,16 @@ import android.text.TextUtils;
  * <p>
  * You can easily define listeners for the buttons set in the {@link SimpleDialogContent} with one of the two methods:
  * <ul>
- * <li>the enclosing activity must implement one or more of the listener interfaces</li>
- * <li>the enclosing fragment must be set as the targetFragment of the {@link SimpleDialogFragment} and implement one
- * or more of the listener interfaces</li>
+ * <li>the enclosing activity must implement one or more of the listener interfaces
+ * <li>the enclosing fragment must use the {@link Fragment#getChildFragmentManager()} to display the {@link
+ * SimpleDialogFragment} and implement one or more of the listener interfaces
  * </ul>
  * <p>
  * There are three different listener interfaces that you can implement:
  * <ul>
- * <li>{@link OnPositiveButtonClickListener}</li>
- * <li>{@link OnNegativeButtonClickListener}</li>
- * <li>{@link OnNeutralButtonClickListener}</li>
+ * <li>{@link OnPositiveButtonClickListener}
+ * <li>{@link OnNegativeButtonClickListener}
+ * <li>{@link OnNeutralButtonClickListener}
  * </ul>
  * If the user chooses to listen to the click on the dialog's button, it is recommended to add a request code to the
  * {@link SimpleDialogContent}. That request code will be given to the onClick method and will allow the user to
@@ -88,14 +89,15 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        Context context = this.getContext();
 
         String title = null, message = null, positiveButtonText = null, negativeButtonText = null, neutralButtonText = null;
         if (this.dialogContent != null) {
-            title = this.dialogContent.title();
-            message = this.dialogContent.message();
-            positiveButtonText = this.dialogContent.positiveButtonText();
-            negativeButtonText = this.dialogContent.negativeButtonText();
-            neutralButtonText = this.dialogContent.neutralButtonText();
+            title = this.dialogContent.title(context);
+            message = this.dialogContent.message(context);
+            positiveButtonText = this.dialogContent.positiveButtonText(context);
+            negativeButtonText = this.dialogContent.negativeButtonText(context);
+            neutralButtonText = this.dialogContent.neutralButtonText(context);
         }
 
         if (!TextUtils.isEmpty(title)) {
@@ -144,21 +146,31 @@ public class SimpleDialogFragment extends DialogFragment implements DialogInterf
     }
 
     private <T> Pair<T, Integer> getListener(Class<T> listenerClazz) {
+        // Legacy: method used to add a fragment listener in 1.0.x version
         Fragment targetFragment = this.getTargetFragment();
         if (listenerClazz.isInstance(targetFragment)) {
             return new Pair<>((T) targetFragment, this.getTargetRequestCode());
         }
 
+        Fragment parentFragment = this.getParentFragment();
+        if (listenerClazz.isInstance(parentFragment)) {
+            return new Pair<>((T) parentFragment, this.getRequestCode());
+        }
+
         FragmentActivity activity = this.getActivity();
         if (listenerClazz.isInstance(activity)) {
-            Integer requestCode = DEFAULT_REQUEST_CODE;
-            if (this.dialogContent != null) {
-                requestCode = this.dialogContent.requestCode();
-            }
-            return new Pair<>((T) activity, requestCode);
+            return new Pair<>((T) activity, this.getRequestCode());
         }
 
         return null;
+    }
+
+    private Integer getRequestCode() {
+        Integer requestCode = DEFAULT_REQUEST_CODE;
+        if (this.dialogContent != null) {
+            requestCode = this.dialogContent.requestCode();
+        }
+        return requestCode;
     }
 
     /**

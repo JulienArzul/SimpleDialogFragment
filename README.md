@@ -22,7 +22,7 @@ Example of use :
 ## Getting started
 
     dependencies {
-        compile 'com.julienarzul:simpledialogfragment:1.0.2'
+        compile 'com.julienarzul:simpledialogfragment:1.1.0'
     }
 
 ## How to use
@@ -76,11 +76,13 @@ Implement the listener interfaces directly in your Fragment:
     public class NestedFragment extends Fragment implements SimpleDialogFragment.OnPositiveButtonClickListener,
         SimpleDialogFragment.OnNegativeButtonClickListener
 
-and set the Fragment as the target fragment of the SimpleDialogFragment:
+and display the SimpleDialogFragment:
 
     SimpleDialogFragment dialogFragment = SimpleDialogFragment.newInstance(dialogContent);
         dialogFragment.setTargetFragment(this, SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE);
-        dialogFragment.show(this.getFragmentManager(), SimpleDialogFragment.TAG);
+        dialogFragment.show(this.getChildFragmentManager(), SimpleDialogFragment.TAG);
+
+**Warning:** Since we're nesting a fragment into another one, you must use the *getChildFragmentManager()* method to show the dialog.
 
 #### Particular case: Displaying several SimpleDialogFragments
 When displaying several SimpleDialogFragment in the same Activity (or Fragment), we need a way to know which dialog triggered a click on the buttons.  
