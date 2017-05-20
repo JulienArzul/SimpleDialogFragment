@@ -1,6 +1,7 @@
 package com.julienarzul.simpledialogfragment;
 
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 
@@ -12,7 +13,7 @@ import com.google.auto.value.AutoValue;
  * Copyright @ Julien Arzul 2017
  */
 @AutoValue
-abstract class AndroidStringResource {
+abstract class AndroidStringResource implements Parcelable {
 
     static AndroidStringResource create(@StringRes int stringResId) {
         return new AutoValue_AndroidStringResource(null, stringResId);
