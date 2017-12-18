@@ -78,9 +78,8 @@ Implement the listener interfaces directly in your Fragment:
 
 and display the SimpleDialogFragment:
 
-    SimpleDialogFragment dialogFragment = SimpleDialogFragment.newInstance(dialogContent);
-        dialogFragment.setTargetFragment(this, SIMPLE_DIALOG_NESTED_IN_FRAGMENT_REQUEST_CODE);
-        dialogFragment.show(this.getChildFragmentManager(), SimpleDialogFragment.TAG);
+    SimpleDialogFragment.newInstance(dialogContent)
+            .show(this.getChildFragmentManager(), SimpleDialogFragment.TAG);
 
 **Warning:** Since we're nesting a fragment into another one, you must use the *getChildFragmentManager()* method to show the dialog.
 
@@ -88,7 +87,7 @@ and display the SimpleDialogFragment:
 When displaying several SimpleDialogFragment in the same Activity (or Fragment), we need a way to know which dialog triggered a click on the buttons.  
 To fix that problem, SimpleDialogFragment uses a Request Code, in the same manner than with onActivityResult.  
 
-When creating a SimpleDialogContent object, you can give it a request code (or when setting the target fragment in case of a fragment): 
+When creating a SimpleDialogContent object, you can give it a request code: 
 
     SimpleDialogContent dialogContent = SimpleDialogContent.builder()
                 .setMessage("Fire missiles?")
